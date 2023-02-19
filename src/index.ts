@@ -1,12 +1,13 @@
-import dotenv from 'dotenv'
-dotenv.config({ path: '/.env' })
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 import cron from 'node-cron'
 import mongoose from 'mongoose'
 import addRunsToDatabase from './helpers/addRunsToDataBase'
 import app from './server'
 
 const PORT = process?.env?.PORT || 8080
-const MONGODB_URI = process?.env?.MONGDB_URI || ''
+const MONGODB_URI = process.env.MONGODB_URI || ''
 
 // configure mongoose and connect to database
 mongoose
