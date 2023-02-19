@@ -6,6 +6,7 @@ phases:
       nodejs: latest
     commands:
       - npm install -g typescript
+      - npm install -g rimraf
       - npm install
   build:
     commands:
