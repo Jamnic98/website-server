@@ -1,15 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
+import { Token } from "../store";
 
-const tokenSchema = new mongoose.Schema(
+const tokenSchema = new mongoose.Schema<Token>(
   {
     access_token: String,
-    refresh_token: String,
     expires_at: Number,
-    expires_in: Number
+    expires_in: Number,
+    refresh_token: String,
   },
   { _id: false }
-)
+);
 
-const Token = mongoose.model('Token', tokenSchema, 'tokens')
-
-export default Token
+export const TokenModel = mongoose.model("Token", tokenSchema, "tokens");

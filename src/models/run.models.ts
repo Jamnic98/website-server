@@ -1,11 +1,10 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
+import { Run } from "../store";
 
-const runSchema = new mongoose.Schema({
+const runSchema = new mongoose.Schema<Run>({
   distance: Number,
   duration: Number,
-  start_date_local: Date
-})
+  start_date_local: Date,
+});
 
-const Run = mongoose.model('Run', runSchema, 'runs')
-
-export default Run
+export const RunModel = mongoose.model("Run", runSchema, "runs");

@@ -1,18 +1,33 @@
-import Run from '../models/run.models'
+import { Request, Response } from "express";
+import { Query } from "mongoose";
+import { RunModel } from "../models";
 
-const getRuns = async (req: any, res: any) => {
+export const getRuns = async (req: Request, res: Response) => {
   try {
-    const after = req.query.after
-    if (typeof after === 'undefined') {
-      res.json(await Run.find())
+    const query = new Query();
+    const after = req.query?.after;
+    if (typeof after === "undefined") {
+      query.where({});
     } else {
-      const date = new Date(after)
-      res.json(await Run.find({ start_date_local: { $gt: date } }))
+      const afterDate = new Date(after as string);
+      query.where({ start_date_local: { $gt: afterDate } });
     }
+    return res.json(await RunModel.find(query));
   } catch (error) {
-    console.error(error)
-    res.status(400).send()
+    console.error(error);
+    res.status(400).send();
   }
-}
+};
 
-export default getRuns
+// const before = req.query?.before;
+// const beforeDate = new Date(before as string);
+
+// if (typeof after === "undefined") {
+//   query.where({ start_date_local: { $lt: beforeDate } });
+// } else if (typeof before === "undefined") {
+// } else {
+//   query.and([
+//     { start_date_local: { $gt: afterDate } },
+//     { start_date_local: { $lt: beforeDate } },
+//   ]);
+// }
