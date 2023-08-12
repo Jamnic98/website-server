@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: latest
     commands:
       - npm install typescript@latest -g
       - npm install
