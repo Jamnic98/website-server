@@ -1,5 +1,55 @@
 export interface Run {
-    distance: number;
-    duration: number;
-    start_date_local: Date;
-  }
+  distance: number;
+  duration: number;
+  start_date_local: Date;
+}
+
+// {
+// "name": None,
+// "distance": existing_activity["distance"],
+// "moving_time": existing_activity["duration"],
+// "elapsed_time": existing_activity["duration"],
+// "total_elevation_gain": None,
+// "type": "Run",
+// "sport_type": "Run",
+// "workout_type": None,
+// "start_date": existing_activity["start_date_local"],
+// "start_date_local": existing_activity["start_date_local"],
+// "timezone": "(GMT+00:00) GMT",
+// "utc_offset": 0.0,
+// "location_city": None,
+// "location_state": None,
+// "location_country": None,
+// "achievement_count": None,
+// "kudos_count": 0,
+// "comment_count": 0,
+// "athlete_count": 1,
+// "photo_count": 0,
+// "map": None,
+// "trainer": False,
+// "commute": False,
+// "manual": False,
+// "private": False,
+// "visibility": "followers_only",
+// "flagged": False,
+// "gear_id": None,
+// "start_latlng": [],
+// "end_latlng": [],
+// "average_speed": None,
+// "max_speed": None,
+// "has_heartrate": False,
+// "average_heartrate": None,
+// "max_heartrate": None,
+// "heartrate_opt_out": False,
+// "display_hide_heartrate_option": True,
+// "elev_high": None,
+// "elev_low": None,
+// "upload_id": None,
+// "upload_id_str": None,
+// "external_id": None,
+// "from_accepted_tag": False,
+// "pr_count": 0,
+// "total_photo_count": 0,
+// "has_kudoed": False,
+// "suffer_score": None
+// }
