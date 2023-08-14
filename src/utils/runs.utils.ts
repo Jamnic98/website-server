@@ -1,6 +1,5 @@
-import axios from "axios";
 import { getActivities } from "../strava";
-import { RunModel, TokenModel } from "../models";
+import { RunModel } from "../models";
 import { Run } from "../store";
 
 export const addRunsToDatabase = async () => {
