@@ -13,6 +13,6 @@ export const getActivities = async (
     });
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to get activites");
+    throw new Error("Failed to get activites.");
   }
 };
