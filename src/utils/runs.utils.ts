@@ -5,10 +5,10 @@ import { Run } from "../store";
 export const addRunsToDatabase = async () => {
   try {
     const today = new Date();
+    // 1 week before today
     const previousDate = new Date(
       today.getFullYear(),
       today.getMonth(),
-      // 1 week before today
       today.getDate() - 7
     );
 
@@ -30,15 +30,16 @@ export const addRunsToDatabase = async () => {
     );
 
     if (filteredRuns.length > 0) {
-      await RunModel.insertMany(
-        filteredRuns.map((run: any) => {
-          return {
-            distance: run.distance,
-            duration: run.moving_time,
-            start_date_local: run.start_date_local,
-          };
-        })
-      );
+      const dataToUpload = filteredRuns.map((run: any) => {
+        return {
+          distance: run.distance,
+          duration: run.moving_time,
+          start_date_local: run.start_date_local,
+        };
+      });
+      
+      await RunModel.insertMany(dataToUpload);
+      console.log("Runs inserted into database.");
     }
   } catch (error) {
     console.error(error);

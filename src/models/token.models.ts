@@ -8,7 +8,7 @@ const tokenSchema = new mongoose.Schema<Token>(
     expires_in: Number,
     refresh_token: String,
   },
-  { _id: false }
+  { _id: false, timestamps: true }
 );
 
 export const TokenModel = mongoose.model("Token", tokenSchema, "tokens");

@@ -2,8 +2,7 @@ import axios from "axios";
 import { TokenModel } from "../models";
 import { Token } from "../store";
 
-const isTokenValid = (token: Token): boolean =>
-  !!token && Date.now() < token.expires_at;
+const isTokenValid = (token: Token): boolean => Date.now() < token.expires_at;
 
 export const requestNewToken = async (expiredToken: Token) => {
   try {
@@ -25,7 +24,7 @@ export const requestNewToken = async (expiredToken: Token) => {
     };
 
     // save token to database
-    await TokenModel.findByIdAndUpdate(0, newToken);
+    await TokenModel.findByIdAndUpdate();
     return newToken;
   } catch (error) {
     console.error(error);
@@ -35,7 +34,7 @@ export const requestNewToken = async (expiredToken: Token) => {
 
 export const retrieveToken = async (): Promise<Token | null> => {
   try {
-    const accessToken = await TokenModel.findById(0);
+    const accessToken = await TokenModel.findOne();
     if (!!accessToken && !isTokenValid(accessToken)) {
       // request new token
       return await requestNewToken(accessToken);
