@@ -31,11 +31,13 @@ export const addRunsToDatabase = async () => {
 
     if (filteredRuns.length > 0) {
       const dataToUpload = filteredRuns.map((run: any) => {
-        return {
-          distance: run.distance,
-          duration: run.moving_time,
-          start_date_local: run.start_date_local,
-        };
+        if(filteredRuns.type === 'Run') {
+          return {
+            distance: run.distance,
+            duration: run.moving_time,
+            start_date_local: run.start_date_local,
+          };
+        }
       });
       
       await RunModel.insertMany(dataToUpload);

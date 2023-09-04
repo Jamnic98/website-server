@@ -18,16 +18,3 @@ export const getRuns = async (req: Request, res: Response) => {
     res.status(400).send();
   }
 };
-
-// const before = req.query?.before;
-// const beforeDate = new Date(before as string);
-
-// if (typeof after === "undefined") {
-//   query.where({ start_date_local: { $lt: beforeDate } });
-// } else if (typeof before === "undefined") {
-// } else {
-//   query.and([
-//     { start_date_local: { $gt: afterDate } },
-//     { start_date_local: { $lt: beforeDate } },
-//   ]);
-// }
