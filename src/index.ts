@@ -42,4 +42,6 @@ process.on("uncaughtException", exitHandler.bind(null, { exit: true }));
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}.`));
 
 // schedule a task to run
-cron.schedule("0 */12 * * *", async () => await addRunsToDatabase());
+// cron.schedule("0 */12 * * *", async () => await addRunsToDatabase());
+
+(async () => await addRunsToDatabase())();

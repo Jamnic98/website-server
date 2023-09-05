@@ -24,22 +24,21 @@ export const addRunsToDatabase = async () => {
 
     // get runs not in database
     const filteredRuns = activities.filter(
-      (run: Run) =>
+      (run: any) =>
+        run.type === "Run" &&
         previousRunDates.indexOf(new Date(run.start_date_local).getTime()) ===
-        -1
+          -1
     );
 
     if (filteredRuns.length > 0) {
       const dataToUpload = filteredRuns.map((run: any) => {
-        if(run.type === 'Run') {
-          return {
-            distance: run.distance,
-            duration: run.moving_time,
-            start_date_local: run.start_date_local,
-          };
-        }
+        return {
+          distance: run.distance,
+          duration: run.moving_time,
+          start_date_local: run.start_date_local,
+        };
       });
-      
+
       await RunModel.insertMany(dataToUpload);
       console.log("Runs inserted into database.");
     }
