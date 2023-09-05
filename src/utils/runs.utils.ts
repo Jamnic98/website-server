@@ -31,7 +31,7 @@ export const addRunsToDatabase = async () => {
 
     if (filteredRuns.length > 0) {
       const dataToUpload = filteredRuns.map((run: any) => {
-        if(filteredRuns.type === 'Run') {
+        if(run.type === 'Run') {
           return {
             distance: run.distance,
             duration: run.moving_time,
