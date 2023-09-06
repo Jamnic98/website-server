@@ -5,11 +5,11 @@ import { Run } from "../store";
 export const addRunsToDatabase = async () => {
   try {
     const today = new Date();
-    // 1 week before today
+    // 1 day before today
     const previousDate = new Date(
       today.getFullYear(),
       today.getMonth(),
-      today.getDate() - 7
+      today.getDate() - 1
     );
 
     const previousRuns = await RunModel.find({
