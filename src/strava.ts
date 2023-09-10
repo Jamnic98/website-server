@@ -1,4 +1,5 @@
 import strava from "strava-v3";
+
 import { retrieveToken } from "./utils";
 
 export const getActivities = async (after: Number = 0) => {
@@ -10,6 +11,5 @@ export const getActivities = async (after: Number = 0) => {
     });
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to get activites.");
   }
 };

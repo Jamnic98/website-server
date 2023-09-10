@@ -1,5 +1,6 @@
 import { getActivities } from "../strava";
 import { RunModel } from "../models";
+
 import { Run } from "../store";
 
 export const addRunsToDatabase = async () => {
@@ -44,6 +45,5 @@ export const addRunsToDatabase = async () => {
     }
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to insert data.");
   }
 };
