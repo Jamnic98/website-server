@@ -1,6 +1,6 @@
 {
 	"bracketSpacing": true,
-	"editor.formatOnSave": true,
+	"formatOnSave": true,
 	"printWidth": 80,
 	"proseWrap": "always",
 	"tabWidth": 2,

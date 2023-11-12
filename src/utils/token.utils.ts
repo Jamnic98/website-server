@@ -23,7 +23,7 @@ export const requestNewToken = async (expiredToken: Token) => {
 			refresh_token,
 		}
 
-		// save token to database 
+		// save token to database
 		return await TokenModel.findOneAndReplace(undefined, newToken, {
 			returnDocument: 'after',
 		})
