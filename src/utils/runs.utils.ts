@@ -1,4 +1,4 @@
-import { fetchStravaActivities } from '../strava'
+import { fetchStravaActivities } from './strava.utils'
 import { RunModel } from '../models'
 import { Run } from '../store'
 

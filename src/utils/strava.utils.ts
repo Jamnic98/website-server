@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import { getStravaToken } from './utils'
-import { Run } from './store'
+import { getStravaToken } from '.'
+import { Run } from '../store'
 
 export const fetchStravaActivities = async (
 	after: number = 0

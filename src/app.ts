@@ -3,15 +3,16 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 import { addRunsToDatabase } from './utils'
-import connectToDatabase from './database'
+import { connectToDB } from './database'
 import app from './server'
 
 const PORT = process?.env?.PORT || 8080
+const MONGODB_URI = process.env.MONGODB_URI || ''
 
-connectToDatabase().then(() =>
+connectToDB(MONGODB_URI).then(() =>
 	// listen for incoming requests
 	app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
 )
 
-// schedule a task to run (each day at midnight)
+// schedule task to run each day at midnight
 cron.schedule('0 0 * * *', async () => await addRunsToDatabase())
