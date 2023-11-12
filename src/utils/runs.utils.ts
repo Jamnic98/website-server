@@ -1,49 +1,52 @@
-import { getActivities } from "../strava";
-import { RunModel } from "../models";
+import { fetchStravaActivities } from '../strava'
+import { RunModel } from '../models'
+import { Run } from '../store'
 
-import { Run } from "../store";
+const today = new Date()
+// 1 day before today
+const previousDate = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate() - 1
+)
 
 export const addRunsToDatabase = async () => {
   try {
-    const today = new Date();
-    // 1 day before today
-    const previousDate = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate() - 1
-    );
-
-    const previousRuns = await RunModel.find({
+    // activities from database
+    const previousRuns: Run[] = await RunModel.find({
       start_date_local: { $gt: previousDate },
-    });
+    })
 
-    const previousRunDates = previousRuns.map((run: Run) =>
+    const previousRunDates = previousRuns?.map((run) =>
       new Date(run.start_date_local).getTime()
-    );
+    )
 
-    const activities = await getActivities(previousDate.getTime() / 1000);
+    // activities from Strava
+    const stravaActivities = await fetchStravaActivities(previousDate.getTime())
 
-    // get runs not in database
-    const filteredRuns = activities.filter(
-      (run: any) =>
-        run.type === "Run" &&
-        previousRunDates.indexOf(new Date(run.start_date_local).getTime()) ===
-          -1
-    );
+    // filter runs from Strava that are not in the database
+    const filteredRuns =
+      stravaActivities &&
+      stravaActivities?.filter(
+        (run: any) =>
+          run.type === 'Run' &&
+          previousRunDates.indexOf(new Date(run.start_date_local).getTime()) ===
+            -1
+      )
 
-    if (filteredRuns.length > 0) {
-      const dataToUpload = filteredRuns.map((run: any) => {
+    if (filteredRuns && filteredRuns.length > 0) {
+      const dataToUpload = filteredRuns.map((run: any): Run => {
         return {
           distance: run.distance,
           duration: run.moving_time,
           start_date_local: run.start_date_local,
-        };
-      });
+        }
+      })
 
-      await RunModel.insertMany(dataToUpload);
-      console.log("Runs inserted into database.");
+      await RunModel.insertMany(dataToUpload)
+      console.log('Runs inserted')
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
-};
+}

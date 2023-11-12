@@ -1,18 +1,23 @@
-import express from "express";
-import helmet from "helmet";
-import cors from "cors";
+import express from 'express'
+import helmet from 'helmet'
+import cors from 'cors'
 
-import { runsRoutes } from "./routes";
+import { runsRoutes } from './routes'
 
-// express configuration
-const app = express();
-app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+const app = express()
+// server configuration
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    xDownloadOptions: false,
+  })
+)
+app.use(cors())
 
-// app routes
-app.use("/health-check", (_req, res) => res.status(200).send());
-app.use("/runs", runsRoutes);
+// base routes
+app.use('/health-check', (_req, res) => res.status(200).send())
+app.use('/runs', runsRoutes)
 
-export default app;
+export default app

@@ -1,15 +1,19 @@
-import strava from "strava-v3";
+import strava from 'strava-v3'
 
-import { retrieveToken } from "./utils";
+import { getStravaToken } from './utils'
+import { Run } from './store'
 
-export const getActivities = async (after: Number = 0) => {
+export const fetchStravaActivities = async (
+  after: number = 0
+): Promise<Run[] | null> => {
   try {
-    const token = await retrieveToken();
+    const token = await getStravaToken()
     return await strava.athlete.listActivities({
       access_token: token?.access_token,
       after,
-    });
+    })
   } catch (error) {
-    console.error(error);
+    console.error(error)
+    return null
   }
-};
+}

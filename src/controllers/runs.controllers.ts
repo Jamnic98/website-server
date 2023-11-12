@@ -1,22 +1,20 @@
-import { Request, Response } from "express";
-import { Query } from "mongoose";
+import { Request, Response } from 'express'
+import { Query } from 'mongoose'
 
-import { RunModel } from "../models";
-
+import { RunModel } from '../models'
 
 export const getRuns = async (req: Request, res: Response) => {
   try {
-    const query = new Query();
-    const after = req.query?.after;
-    if (typeof after === "undefined") {
-      query.where({});
+    const query = new Query()
+    const after = req.query?.after
+    if (after && typeof after === 'string') {
+      query.where({ start_date_local: { $gt: new Date(after) } })
     } else {
-      const afterDate = new Date(after as string);
-      query.where({ start_date_local: { $gt: afterDate } });
+      query.where({})
     }
-    return res.json(await RunModel.find(query));
+    return res.json(await RunModel.find(query))
   } catch (error) {
-    console.error(error);
-    res.status(400).send();
+    console.error(error)
+    res.status(400).send()
   }
-};
+}

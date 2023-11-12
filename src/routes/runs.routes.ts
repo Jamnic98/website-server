@@ -1,9 +1,10 @@
-import express from "express";
+import express from 'express'
 
-import { getRuns } from "../controllers";
+import { getRuns } from '../controllers'
 
+const router = express.Router()
 
-const router = express.Router();
-router.get("", getRuns);
+// get all runs
+router.get('', getRuns)
 
-export const runsRoutes = router;
+export const runsRoutes = router

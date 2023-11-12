@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { Token } from "../store";
+import mongoose from 'mongoose'
+import { Token } from '../store'
 
 const tokenSchema = new mongoose.Schema<Token>(
   {
@@ -9,6 +9,6 @@ const tokenSchema = new mongoose.Schema<Token>(
     refresh_token: String,
   },
   { _id: false, timestamps: true }
-);
+)
 
-export const TokenModel = mongoose.model("Token", tokenSchema, "tokens");
+export const TokenModel = mongoose.model('Token', tokenSchema, 'tokens')
