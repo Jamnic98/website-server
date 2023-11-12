@@ -9,10 +9,10 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    xDownloadOptions: false,
-  })
+	helmet({
+		contentSecurityPolicy: false,
+		xDownloadOptions: false,
+	})
 )
 app.use(cors())
 

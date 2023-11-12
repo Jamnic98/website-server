@@ -3,12 +3,12 @@ import mongoose from 'mongoose'
 const MONGODB_URI = process.env.MONGODB_URI || ''
 
 const exitHandler = (options: { cleanup?: boolean; exit?: boolean }) => {
-  if (options.cleanup) {
-    mongoose.connection.close()
-  }
-  if (options.exit) {
-    process.exit()
-  }
+	if (options.cleanup) {
+		mongoose.connection.close()
+	}
+	if (options.exit) {
+		process.exit()
+	}
 }
 
 process.stdin.resume() //so the program will not close instantly
@@ -25,12 +25,12 @@ process.on('uncaughtException', exitHandler.bind(null, { exit: true }))
 
 // configure mongoose and connect to database
 export default async () => {
-  try {
-    await mongoose.connect(MONGODB_URI, {
-      autoIndex: false,
-    })
-    console.log('Database connection established')
-  } catch (_error) {
-    console.error('Failed to connect to database')
-  }
+	try {
+		await mongoose.connect(MONGODB_URI, {
+			autoIndex: false,
+		})
+		console.log('Database connection established')
+	} catch (_error) {
+		console.error('Failed to connect to database')
+	}
 }

@@ -9,8 +9,8 @@ import app from './server'
 const PORT = process?.env?.PORT || 8080
 
 connectToDatabase().then(() =>
-  // listen for incoming requests
-  app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+	// listen for incoming requests
+	app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
 )
 
 // schedule a task to run (each day at midnight)
