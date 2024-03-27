@@ -9,7 +9,7 @@
 		"build": "npx tsc",
 		"test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage",
 		"test:watch": "jest --watchAll",
-		"prepare": "husky install",
+		"prepare": "npx husky install",
 		"format:check": "prettier 'src/**/*.ts' --check .",
 		"format:write": "prettier 'src/**/*.ts' --write .",
 		"lint:check": "eslint 'src/**/*.ts'",
