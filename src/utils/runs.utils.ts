@@ -2,19 +2,15 @@ import { fetchStravaActivities } from './strava.utils'
 import { RunModel } from '../models'
 import { Run } from '../store'
 
-const today = new Date()
-// 1 day before today
-const dateInThePast = new Date(
-	today.getFullYear(),
-	today.getMonth(),
-	today.getDate() - 1
-)
+// get date 1 month before today
+const currentDate = new Date()
+const dateInThePast = new Date(currentDate.setMonth(currentDate.getMonth() - 1))
 
 export const addRunsToDatabase = async () => {
 	try {
 		// activities from database
 		const previousRuns: Run[] = await RunModel.find({
-			start_date_local: { $gt: dateInThePast },
+			start_date_local: { $gte: dateInThePast },
 		})
 
 		const previousRunDates = previousRuns?.map((run) =>
@@ -23,7 +19,7 @@ export const addRunsToDatabase = async () => {
 
 		// activities from Strava
 		const stravaActivities = await fetchStravaActivities(
-			dateInThePast.getTime()
+			dateInThePast.getTime() / 1000
 		)
 
 		// filter runs from Strava that are not in the database
@@ -36,6 +32,7 @@ export const addRunsToDatabase = async () => {
 						-1
 			)
 
+		// if new runs on Strava, insert them into DB
 		if (filteredRuns && filteredRuns.length > 0) {
 			const dataToUpload = filteredRuns.map((run: any): Run => {
 				return {
