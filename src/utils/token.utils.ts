@@ -29,7 +29,7 @@ export const requestNewToken = async (expiredToken: Token) => {
 		})
 	} catch (error) {
 		console.error(error)
-		throw new Error('Failed to refresh access token.')
+		throw new Error('Failed to refresh access token')
 	}
 }
 
@@ -42,7 +42,7 @@ export const getStravaToken = async (): Promise<Token | null> => {
 		}
 		return token
 	} catch (error) {
-		console.error(error)
+		console.error('Failed to get access token')
 		return null
 	}
 }
