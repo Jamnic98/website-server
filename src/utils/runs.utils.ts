@@ -8,33 +8,35 @@ const dateInThePast = new Date(currentDate.setMonth(currentDate.getMonth() - 1))
 
 export const addRunsToDatabase = async () => {
 	try {
-		// activities from database
+		// runs from database after a past date
 		const previousRuns: Run[] = await RunModel.find({
 			start_date_local: { $gte: dateInThePast },
 		})
 
+		// get a list of timestamps for runs that exist in the database
 		const previousRunDates = previousRuns?.map((run) =>
 			new Date(run.start_date_local).getTime()
 		)
 
-		// activities from Strava
+		console.log(previousRunDates)
+
+		// fetch activities from Strava
 		const stravaActivities = await fetchStravaActivities(
 			dateInThePast.getTime() / 1000
 		)
 
 		// filter runs from Strava that are not in the database
-		const filteredRuns =
-			stravaActivities &&
-			stravaActivities?.filter(
-				(run: any) =>
-					run.type === 'Run' &&
-					previousRunDates.indexOf(new Date(run.start_date_local).getTime()) ===
-						-1
-			)
+		const filteredRuns = stravaActivities?.filter(
+			(stravaActivity: any) =>
+				stravaActivity.type === 'Run' &&
+				previousRunDates.indexOf(
+					new Date(stravaActivity.start_date_local).getTime()
+				) === -1
+		)
 
 		// if new runs on Strava, insert them into DB
 		if (filteredRuns && filteredRuns.length > 0) {
-			const dataToUpload = filteredRuns.map((run: any): Run => {
+			const dataToInsert = filteredRuns.map((run: any): Run => {
 				return {
 					distance: run.distance,
 					duration: run.moving_time,
@@ -42,7 +44,7 @@ export const addRunsToDatabase = async () => {
 				}
 			})
 
-			await RunModel.insertMany(dataToUpload)
+			await RunModel.insertMany(dataToInsert)
 			console.log('Runs inserted')
 		}
 	} catch (error) {
