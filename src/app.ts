@@ -17,5 +17,3 @@ connectToDB(MONGODB_URI).then(() =>
 	// listen for incoming requests
 	app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
 )
-
-addRunsToDatabase()
