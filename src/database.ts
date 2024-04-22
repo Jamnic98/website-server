@@ -35,6 +35,6 @@ export const connectToDB = async (mongoDBConnectionURI: string) => {
 		})
 		console.log('Database connection established')
 	} catch (_error) {
-		console.error('Failed to connect to database')
+		throw new Error('Failed to connect to database')
 	}
 }
