@@ -18,8 +18,6 @@ export const addRunsToDatabase = async () => {
 			new Date(run.start_date_local).getTime()
 		)
 
-		console.log(previousRunDates)
-
 		// fetch activities from Strava
 		const stravaActivities = await fetchStravaActivities(
 			dateInThePast.getTime() / 1000
@@ -45,7 +43,7 @@ export const addRunsToDatabase = async () => {
 			})
 
 			await RunModel.insertMany(dataToInsert)
-			console.log('Runs inserted')
+			console.log('Runs inserted:', dataToInsert)
 		}
 	} catch (error) {
 		console.error(error)
