@@ -4,14 +4,16 @@ import { Query } from 'mongoose'
 import { RunModel } from '../models'
 
 export const getRuns = async (req: Request, res: Response) => {
-	const after = req.query?.after
-	const query = new Query()
-	if (after && typeof after === 'string') {
-		query.where({ start_date_local: { $gt: new Date(after) } })
-	} else {
-		query.where({})
-	}
 	try {
+		const query = new Query()
+		const after = req.query?.after
+		if (after) {
+			query.where({
+				start_date_local: { $gt: new Date(Number(after)) },
+			})
+		} else {
+			query.where({})
+		}
 		return res.json(await RunModel.find(query))
 	} catch (error) {
 		console.error(error)

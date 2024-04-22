@@ -5,9 +5,9 @@
 	"main": "app.ts",
 	"scripts": {
 		"dev": "nodemon src/app.ts",
-		"start": "node build/app.js",
+		"start": "npm run build && node build/app.js",
 		"build": "npx tsc",
-		"test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage",
+		"test": "cross-env NODE_ENV=test jest --testTimeout=5000 --coverage",
 		"test:watch": "jest --watchAll",
 		"prepare": "husky install",
 		"format:check": "prettier 'src/**/*.ts' --check .",
