@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "nodemon src/app.ts",
 		"start": "npm run build && node build/app.js",
-		"build": "npx tsc",
+		"build": "tsc",
 		"test": "cross-env NODE_ENV=test jest --testTimeout=5000 --coverage",
 		"test:watch": "jest --watchAll",
 		"format:check": "prettier 'src/**/*.ts' --check .",
