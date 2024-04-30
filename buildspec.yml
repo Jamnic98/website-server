@@ -20,8 +20,5 @@ cache:
 
 artifacts:
   files:
-    - build/**/*
-    - node_modules/**/*
-    - package.json
-    - package-lock.json
+    - /**/*
   discard-paths: no
