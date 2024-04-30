@@ -5,11 +5,10 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
-      - npm install typescript@latest -g
-      - npm install
+      - npm install typescript -g
   build:
     commands:
-      - npx tsc
+      - tsc
 
 artifacts:
   files:
