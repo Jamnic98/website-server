@@ -12,6 +12,6 @@
 		"resolveJsonModule": true
 	},
 	"lib": ["es2015"],
-	"include": ["**/*.ts", "**/*.*.ts", "__tests__/"],
+	"include": ["src/**/*.ts", "src/**/*.*.ts", "__tests__/"],
 	"exclude": ["node_modules"]
 }

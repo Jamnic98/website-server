@@ -18,7 +18,7 @@ phases:
       - echo Build started on `date`
       - npm run build
       - npm run test
-      - npm prune --production
+      - npm prune --omit=dev
 
   post_build:
     commands:
@@ -30,3 +30,5 @@ artifacts:
     - node_modules/**/*
     - package.json
     - package-lock.json
+
+  discard-paths: no
