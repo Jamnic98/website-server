@@ -6,15 +6,13 @@ phases:
       nodejs: 20
     commands:
       - npm install typescript -g
+      - npm install
 
-  build:
+  pre_build:
     commands:
       - tsc
 
 artifacts:
   files:
-    - package.json
-    - package-lock.json
-    - 'tsconfig.json'
-
-  discard-paths: no
+    - '**/*'
+  discard-paths: yes
