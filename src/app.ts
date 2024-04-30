@@ -14,4 +14,6 @@ const MONGODB_URI = process.env.MONGODB_URI || ''
 cron.schedule('0 0 * * *', async () => await addRunsToDatabase())
 
 connectToDB(MONGODB_URI)
-app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+app.listen(Number(PORT), '127.0.0.1', () =>
+	console.log(`Server listening on port: ${PORT}`)
+)
