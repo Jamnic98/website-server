@@ -25,5 +25,3 @@ const runApp = async () => {
 }
 
 runApp()
-
-addRunsToDatabase()
