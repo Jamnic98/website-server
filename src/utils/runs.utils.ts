@@ -11,7 +11,7 @@ export const addRunsToDatabase = async () => {
 		// runs from database after a past date
 		const previousRuns: Run[] = await RunModel.find({
 			start_date_local: { $gte: dateInThePast },
-		})
+		}).exec()
 
 		// get a list of timestamps for runs that exist in the database
 		const previousRunDates = previousRuns?.map((run) =>

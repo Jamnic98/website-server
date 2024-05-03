@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { TokenModel } from '../models'
 import { Token } from '../store'
 
@@ -26,7 +27,7 @@ export const requestNewToken = async (expiredToken: Token) => {
 		// save token to database
 		return await TokenModel.findOneAndReplace(undefined, newToken, {
 			returnDocument: 'after',
-		})
+		}).exec()
 	} catch (error) {
 		console.error(error)
 		throw new Error('Failed to refresh access token')

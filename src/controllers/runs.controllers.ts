@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { Query } from 'mongoose'
 
-import { RunModel } from '../models'
+import { RunModel } from '../models/run.models'
 
 export const getRuns = async (req: Request, res: Response) => {
 	try {
@@ -14,7 +14,7 @@ export const getRuns = async (req: Request, res: Response) => {
 		} else {
 			query.where({})
 		}
-		return res.json(await RunModel.find(query))
+		return res.json(await RunModel.find(query).exec())
 	} catch (error) {
 		console.error(error)
 		return res.status(400).send(error)

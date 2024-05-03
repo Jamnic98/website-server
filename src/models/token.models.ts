@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
-import { Token } from '../store'
+
+import { Token } from 'store'
 
 const tokenSchema = new mongoose.Schema<Token>(
 	{
