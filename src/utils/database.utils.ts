@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-import { RunModel /* TokenModel */ } from '../models'
+import { RunModel } from '../models'
 import { testRunData } from '../data/seedData'
 
 // configure mongoose and connect to database
@@ -20,7 +20,6 @@ export const connectToDB = async (mongoDBConnectionURI: string) => {
 export const clearDatabase = async () => {
 	try {
 		await RunModel.deleteMany({}).exec()
-		// await TokenModel.deleteMany({})
 	} catch (error) {
 		console.log(error)
 	}
@@ -29,7 +28,6 @@ export const clearDatabase = async () => {
 export const seedDatabase = async () => {
 	try {
 		await RunModel.insertMany(testRunData)
-		// await TokenModel.insertMany(testTokenData)
 	} catch (error) {
 		console.error(error)
 	}
