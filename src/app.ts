@@ -16,6 +16,8 @@ const runApp = async () => {
 	try {
 		await connectToDB(MONGODB_URI)
 		app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+		// TODO: uncomment to manually insert run data
+		// await addRunsToDatabase()
 	} catch (error) {
 		console.error(error)
 	}
