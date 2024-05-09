@@ -42,7 +42,7 @@ export const addRunsToDatabase = async () => {
 				}
 			})
 
-			// await RunModel.insertMany(dataToInsert)
+			await RunModel.insertMany(dataToInsert)
 			console.log('Runs inserted:', dataToInsert)
 		}
 	} catch (error) {
