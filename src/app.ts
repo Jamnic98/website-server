@@ -6,17 +6,19 @@ import { addRunsToDatabase, connectToDB } from './utils'
 
 dotenv.config()
 
-const PORT = process?.env?.PORT || 8080
+const PORT = process?.env?.PORT || '8080'
 const MONGODB_URI = process.env.MONGODB_URI || ''
 
-// schedule task to run each day at midnight
+// schedule adding new run data to database each day at midnight
 cron.schedule('0 0 * * *', async () => await addRunsToDatabase())
 
 const runApp = async () => {
-	await connectToDB(MONGODB_URI)
-	app.listen(Number(PORT), () =>
-		console.log(`Server listening on port ${PORT}`)
-	)
+	try {
+		await connectToDB(MONGODB_URI)
+		app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+	} catch (error) {
+		console.error(error)
+	}
 }
 
 runApp()

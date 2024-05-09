@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-import { RunModel, TokenModel } from '../models'
+import { RunModel /* TokenModel */ } from '../models'
 import { testRunData } from '../data/seedData'
 
 // configure mongoose and connect to database
