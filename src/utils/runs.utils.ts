@@ -2,15 +2,17 @@ import { fetchStravaActivities } from './strava.utils'
 import { RunModel } from '../models'
 import { Run } from '../store'
 
-// get date 1 month before today
-const currentDate = new Date()
-const dateInThePast = new Date(currentDate.setMonth(currentDate.getMonth() - 1))
-
 export const addRunsToDatabase = async () => {
+	// get date 1 month before today
+	const currentDate = new Date()
+	const dateInThePast = new Date(
+		currentDate.setMonth(currentDate.getMonth() - 1)
+	)
+
 	try {
 		// runs from database after a past date
 		const previousRuns: Run[] = await RunModel.find({
-			start_date_local: { $gte: dateInThePast },
+			start_date_local: { $gt: dateInThePast },
 		}).exec()
 
 		// get a list of timestamps for runs that exist in the database
